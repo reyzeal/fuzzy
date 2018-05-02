@@ -1,0 +1,21 @@
+{
+    "name": "reyzeal/fuzzy",
+    "description": "PHP Fuzzy",
+    "require": {
+        "phayes/geophp": "^1.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rizal Ardhi Rahmadani",
+            "email": "rizal.ardhi.rahmadani@gmail.com"
+        }
+    ],
+    "autoload":
+        {
+            "psr-4":
+                {
+                    "" : ""
+                }
+        }
+}
