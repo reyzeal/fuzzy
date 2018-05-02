@@ -66,19 +66,28 @@ require "vendor/autoload.php";
 
 use Reyzeal\Fuzzy;
 
-$fuzzy = new Fuzzy("Tekstil","Tsukamoto");
+$fuzzy = new Fuzzy("Produksi Tekstil","Tsukamoto");
 
 $fuzzy->input()-> addCategory('Permintaan') 
 	-> addMembership('Turun',"trapmf",[0,0,1000,5000])
 	-> addMembership('Naik',"trapmf",[1000,5000,6000,6000]);
 
+
+
+
+
 $fuzzy->input()-> addCategory('Persediaan') 
 	-> addMembership('Sedikit',"trapmf",[0,0,100,600])
 	-> addMembership('Banyak',"trapmf",[100,600,700,700]);
 
+
+
+
+
 $fuzzy->output()-> addCategory('Produksi')
 	-> addMembership('Berkurang',"trapmf",[0,0,2000,7000])
 	-> addMembership('Bertambah',"trapmf",[2000,7000,8000,8000]);
+
 
 $fuzzy->rules()
 	-> add('Permintaan_Turun AND Persediaan_Banyak') 
@@ -93,4 +102,10 @@ $fuzzy->rules()
 	-> add('Permintaan_Naik AND Persediaan_Banyak') 
 	-> then('Produksi_Bertambah');
 
-print_r($fuzzy -> calc(['Permintaan' => 4000,'Persediaan' => 300]));
+echo $fuzzy -> calc([
+	'Permintaan' => 4000,
+	'Persediaan' => 300
+]);
+
+
+
