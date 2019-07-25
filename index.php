@@ -69,25 +69,17 @@ use Reyzeal\Fuzzy;
 $fuzzy = new Fuzzy("Produksi Tekstil","Tsukamoto");
 
 $fuzzy->input()-> addCategory('Permintaan') 
-	-> addMembership('Turun',"trapmf",[0,0,1000,5000])
-	-> addMembership('Naik',"trapmf",[1000,5000,6000,6000]);
-
-
-
-
+	-> addMembership('Turun',"trimf",[0,0,5000])
+	-> addMembership('Naik',"trimf",[0,5000,5000]);
 
 $fuzzy->input()-> addCategory('Persediaan') 
 	-> addMembership('Sedikit',"trapmf",[0,0,100,600])
 	-> addMembership('Banyak',"trapmf",[100,600,700,700]);
 
-
-
-
-
 $fuzzy->output()-> addCategory('Produksi')
-	-> addMembership('Berkurang',"trapmf",[0,0,2000,7000])
-	-> addMembership('Bertambah',"trapmf",[2000,7000,8000,8000]);
-
+	-> addMembership('Berkurang',"trimf",[0, 7000, 7000])
+	-> addMembership('Bertambah',"trimf",[0, 0, 7000])
+	-> addMembership('Sedang',"trimf",[0, 3500, 7000]);
 
 $fuzzy->rules()
 	-> add('Permintaan_Turun AND Persediaan_Banyak') 
@@ -100,7 +92,7 @@ $fuzzy->rules()
 	-> then('Produksi_Bertambah');
 $fuzzy->rules()
 	-> add('Permintaan_Naik AND Persediaan_Banyak') 
-	-> then('Produksi_Bertambah');
+	-> then('Produksi_Sedang');
 
 echo $fuzzy -> calc([
 	'Permintaan' => 4000,
